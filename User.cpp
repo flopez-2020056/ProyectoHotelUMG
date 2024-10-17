@@ -6,13 +6,56 @@
 #include <string>
 using namespace std;
 
-void createReservation (){
-    cout<<"-----------prueba de funcion create reservation---------------"<<endl;
+
+void createReservation(){
+    ofstream archive("reservation.txt", ios::app);
+    if (!archive)
+    {
+        cout<<"Error al crear el archivo reservation.txt revisa tu código.";
+    } else {
+        string userName, entryDate, departureDate, description;
+        double priceRoom, roomCode;
+        char continueR;
+
+        cout<<"Datos del cliente"<<endl<<endl;
+
+        cout<<"Nombre del cliente"<<endl;
+        cin>>userName;
+        cout<<"Ingresa la fecha de ingreso"<<endl;
+        cin>>entryDate;
+        cout<<"Ingresa la fecha de salida"<<endl;
+        cin>>departureDate;
+        do
+        {
+            cout<<"Datos de la habitacion a reservar"<<endl<<endl;
+
+            cout<<"Ingrese el código de la habitacion"<<endl;
+            cin>>roomCode;
+            cout<<"Ingrese la descripcion de la habitacion"<<endl;
+            cin>>description;
+            cout<<"Ingrese el precio de la habitacion"<<endl;
+            cin>>priceRoom;
+
+            archive<<userName<<";"<<entryDate<<";"<<departureDate<<";"<<roomCode<<";"<<description<<";"<<priceRoom<<";"<<endl;
+             
+            cout<<"Desea seguir agregando reservaciones? (S/N)";
+            cin>>continueR;
+
+
+           
+        } while (continueR == 'S' || continueR == 's');
+
+        archive.close();
+
+        cout<<"Se ingreso de manera correta la habitacion";
+        
+    }
     
 }
 
+
 void listUser(){
-ifstream archive("user.csv", ios::in);
+ifstream archive("user.txt", ios::in);
      if (!archive)
      {
         cout<<"No se encontro el archivo deseado (user.csv)"<<endl;
@@ -48,7 +91,7 @@ ifstream archive("user.csv", ios::in);
 
 
 void createUser(){
-        ofstream archive("user.csv", ios::app);
+        ofstream archive("user.txt", ios::app);
         if (!archive)
         {
             cout<<"error al crear el archivo user.csv"<<endl;
@@ -90,7 +133,7 @@ void menu(){
         cout<<"2. Listado de usuarios"<<endl;
         cout<<"3. crear una reservacion en el hotel"<<endl;
         cout<<"0. Salir"<<endl;
-        cout<<"Seleccione una opcion: ";
+        cout<<"Seleccione una opcion: "<<endl;
         cin>>option;
         switch (option)
         {
