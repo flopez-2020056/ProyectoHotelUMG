@@ -20,19 +20,25 @@ void createReservation(){
         cout<<"Datos del cliente"<<endl<<endl;
 
         cout<<"Nombre del cliente"<<endl;
-        cin>>userName;
+        cin.ignore();
+        //cin>>userName;
+        getline(cin, userName);
         cout<<"Ingresa la fecha de ingreso"<<endl;
-        cin>>entryDate;
+        //cin>>entryDate;
+        getline(cin, entryDate);
         cout<<"Ingresa la fecha de salida"<<endl;
-        cin>>departureDate;
+        //cin>>departureDate;
+        getline(cin, departureDate);
         do
         {
             cout<<"Datos de la habitacion a reservar"<<endl<<endl;
 
             cout<<"Ingrese el código de la habitacion"<<endl;
             cin>>roomCode;
+            cin.ignore();
             cout<<"Ingrese la descripcion de la habitacion"<<endl;
-            cin>>description;
+            //cin>>description;
+            getline(cin, description);
             cout<<"Ingrese el precio de la habitacion"<<endl;
             cin>>priceRoom;
 
@@ -130,11 +136,12 @@ void menu(){
     do{
         cout<<"Menu de opciones"<<endl;
         cout<<"1. Crear cliente"<<endl;
-        cout<<"2. Listado de usuarios"<<endl;
+        cout<<"2. Listado de clientes"<<endl;
         cout<<"3. crear una reservacion en el hotel"<<endl;
         cout<<"0. Salir"<<endl;
         cout<<"Seleccione una opcion: "<<endl;
         cin>>option;
+        cout<<"   "<<endl;
         switch (option)
         {
         case 1:
