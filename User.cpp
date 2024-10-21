@@ -60,7 +60,7 @@ void createReservation(){
 }
 
 
-void listUser(){
+void getUser(){
 ifstream archive("user.txt", ios::in);
      if (!archive)
      {
@@ -131,6 +131,58 @@ void createUser(){
     
 }
 
+
+void findReservationByCode(){
+    ifstream archive("reservation.txt", ios::in);
+    if (!archive)
+    {
+        cout<<"No se encontro el archivo deseado (reservation.txt)"<<endl;
+    }else {
+        string dataReservation;
+        string roomCode, userName, entryDate, departureDate, description, priceRoom;
+        string numCodeFind;
+        cout<<"Ingrese el codigo de la habitación que quiere buscar"<<endl;
+        cin>>numCodeFind;
+        
+        bool exist = true;
+        while (getline(archive,dataReservation))
+        {
+            stringstream token(dataReservation);
+
+            getline(token, roomCode,';');
+            getline(token, priceRoom,';');
+            getline(token, description,';');
+            getline(token, departureDate,';');
+            getline(token, entryDate,';');
+            getline(token, userName,';');
+
+            
+
+
+            if (numCodeFind.compare(roomCode) == 0)
+            {
+                exist = false;
+                cout<<roomCode<<endl;
+                cout<<priceRoom<<endl;
+                cout<<description<<endl;
+                cout<<departureDate<<endl;
+                cout<<entryDate<<endl;
+                cout<<userName<<endl;
+            }
+            
+            
+        }
+        archive.close();
+        if (!exist)
+        {
+            cout<<"La habitacion con el codigo "<<numCodeFind<<" no existe"<<endl;
+        }
+        
+    }
+    
+
+}
+
 void menu(){
     int option;
     do{
@@ -138,6 +190,7 @@ void menu(){
         cout<<"1. Crear cliente"<<endl;
         cout<<"2. Listado de clientes"<<endl;
         cout<<"3. crear una reservacion en el hotel"<<endl;
+        cout<<"4. Listar las reservaciones del hotel por codigo de habitación"<<endl;
         cout<<"0. Salir"<<endl;
         cout<<"Seleccione una opcion: "<<endl;
         cin>>option;
@@ -147,13 +200,15 @@ void menu(){
         case 1:
             createUser(); break;
         case 2:
-            listUser(); break;
+            getUser(); break;
         case 3:
             createReservation(); break;
+        case 4:
+            findReservationByCode(); break;
         case 0:
-            cout<<"Esta saliendo de la aplicación, vuelva pronto";       
+            cout<<"Esta saliendo de la aplicación, vuelva pronto"<<endl;; break;
         default:
-            cout<<"La opcion que se esta usando no existe en el listado del hotel";
+            cout<<"La opcion que se esta usando no existe en el listado del hotel"<<endl;
             break;
         }
     }while(option != 0);
