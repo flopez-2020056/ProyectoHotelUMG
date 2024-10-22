@@ -139,29 +139,30 @@ void findReservationByCode(){
         cout<<"No se encontro el archivo deseado (reservation.txt)"<<endl;
     }else {
         string dataReservation;
-        string roomCode, userName, entryDate, departureDate, description, priceRoom;
+        string roomCode,userName, entryDate, departureDate, description, priceRoom;
         string numCodeFind;
         cout<<"Ingrese el codigo de la habitación que quiere buscar"<<endl;
         cin>>numCodeFind;
         
-        bool exist = true;
+        bool exist = false;
         while (getline(archive,dataReservation))
         {
             stringstream token(dataReservation);
 
-            getline(token, roomCode,';');
-            getline(token, priceRoom,';');
-            getline(token, description,';');
-            getline(token, departureDate,';');
-            getline(token, entryDate,';');
-            getline(token, userName,';');
+            getline(token, userName, ';');
+getline(token, entryDate, ';');
+getline(token, departureDate, ';');
+getline(token, roomCode, ';');
+getline(token, description, ';');
+getline(token, priceRoom, ';');
+
 
             
 
 
             if (numCodeFind.compare(roomCode) == 0)
             {
-                exist = false;
+                exist = true;
                 cout<<roomCode<<endl;
                 cout<<priceRoom<<endl;
                 cout<<description<<endl;
