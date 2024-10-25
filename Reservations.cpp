@@ -7,6 +7,8 @@
 using namespace std;
 
 
+
+
 void createReservation(){
     ofstream archive("reservation.txt", ios::app);
     if (!archive)
@@ -23,14 +25,15 @@ void createReservation(){
         cin.ignore();
         //cin>>userName;
         getline(cin, userName);
-        cout<<"Ingresa la fecha de ingreso"<<endl;
+        cout<<"Ingresa la fecha de ingreso (dia/mes/año)"<<endl;
         //cin>>entryDate;
         getline(cin, entryDate);
-        cout<<"Ingresa la fecha de salida"<<endl;
+        cout<<"Ingresa la fecha de salida (dia/mes/año)"<<endl;
         //cin>>departureDate;
         getline(cin, departureDate);
         do
         {
+            cout<<""<<endl;
             cout<<"Datos de la habitacion a reservar"<<endl<<endl;
 
             cout<<"Ingrese el código de la habitacion"<<endl;
@@ -44,8 +47,10 @@ void createReservation(){
 
             archive<<userName<<";"<<entryDate<<";"<<departureDate<<";"<<roomCode<<";"<<description<<";"<<priceRoom<<";"<<endl;
              
-            cout<<"Desea seguir agregando reservaciones? (S/N)";
+            cout<<""<<endl;
+            cout<<"Desea seguir agregando reservaciones? (S/N): ";
             cin>>continueR;
+            cout<<""<<endl;
 
 
            
@@ -54,9 +59,71 @@ void createReservation(){
         archive.close();
 
         cout<<"Se ingreso de manera correta la habitacion";
+        cout<<""<<endl;
         
     }
     
+}
+
+void findReservationByCode(){
+    ifstream archive("reservation.txt", ios::in);
+    if (!archive)
+    {
+        cout<<"No se encontro el archivo deseado (reservation.txt)"<<endl;
+    }else {
+        string dataReservation;
+        string roomCode,userName, entryDate, departureDate, description, priceRoom;
+        string numCodeFind;
+        cout<<"Ingrese el codigo de la habitación que quiere buscar"<<endl;
+        cin>>numCodeFind;
+        
+        bool exist = false;
+        while (getline(archive,dataReservation))
+        {
+            stringstream token(dataReservation);
+
+            getline(token, userName, ';');
+            getline(token, entryDate, ';');
+            getline(token, departureDate, ';');
+            getline(token, roomCode, ';');
+            getline(token, description, ';');
+            getline(token, priceRoom, ';');
+
+
+            
+
+
+            if (numCodeFind.compare(roomCode) == 0)
+            {
+                exist = true;
+                cout<<""<<endl;
+                cout<<"La habitacion con el codigo "<<roomCode<<" es la siguiente: "<<endl;
+                cout<<""<<endl;
+                //cout<<roomCode<<endl;
+                cout<<"Codigo de habitacion: "<<roomCode<<endl;
+                //cout<<priceRoom<<endl;
+                cout<<"Precio de habitacion: "<<priceRoom<<endl;
+                //cout<<description<<endl;
+                cout<<"Descripcion de habitacion: "<<description<<endl;
+                //cout<<departureDate<<endl;
+                cout<<"fecha de entrada de habitacion: "<<entryDate<<endl;
+                //cout<<entryDate<<endl;
+                cout<<"Fecha de salida de habitacion: "<<departureDate<<endl;
+                cout<<""<<endl;
+                //cout<<userName<<endl;
+            }
+            
+            
+        }
+        archive.close();
+        if (!exist)
+        {
+            cout<<"La habitacion con el codigo "<<numCodeFind<<" no existe"<<endl;
+        }
+        
+    }
+    
+
 }
 
 
@@ -80,6 +147,9 @@ ifstream archive("user.txt", ios::in);
             getline(token, city, ';');
             getline(token, email, ';');
 
+            cout<<""<<endl;
+            cout<<"Usuario del hotel"<<endl;
+            cout<<""<<endl;
             cout<<id_user<<endl;
             cout<<telephoneNumber<<endl;
             cout<<name<<endl;
@@ -100,30 +170,39 @@ void createUser(){
         ofstream archive("user.txt", ios::app);
         if (!archive)
         {
-            cout<<"error al crear el archivo user.csv"<<endl;
+
+            cout<<"error al crear el archivo user.txt"<<endl;
+
         }else{
+
             long id_user, telephoneNumber;
             string name, city, email;
 
-            cout<<"Ingrese el id de usuarion:  "<<endl;
+            cout<<"Ingrese el id de usuario:  "<<endl;
             cin>>id_user;
+            cin.ignore();
             
             cout<<"Ingrese el nombre del usuario: "<<endl;
-            cin>>name;
+            //cin>>name;
+            getline(cin,name);
 
             cout<<"Ingrese la ciudad del usuario: "<<endl;
-            cin>>city;
+            //cin>>city;
+            getline(cin,city);
 
             cout<<"Ingrese el telefono del usuario:  "<<endl;
             cin>>telephoneNumber;
+            cin.ignore();
             
             cout <<"Ingrese el correo del usuario: "<<endl;
-            cin>>email;
+            //cin>>email;
+            getline(cin,email);
 
             archive<<id_user<<";"<<name<<";"<<city<<";"<<telephoneNumber<<";"<<email<<endl;
 
             archive.close();
 
+            cout<<""<<endl;
             cout<<"Se ingreso correctamente el cliente del hotel."<<endl<<endl;
 
 
@@ -132,68 +211,21 @@ void createUser(){
 }
 
 
-void findReservationByCode(){
-    ifstream archive("reservation.txt", ios::in);
-    if (!archive)
-    {
-        cout<<"No se encontro el archivo deseado (reservation.txt)"<<endl;
-    }else {
-        string dataReservation;
-        string roomCode,userName, entryDate, departureDate, description, priceRoom;
-        string numCodeFind;
-        cout<<"Ingrese el codigo de la habitación que quiere buscar"<<endl;
-        cin>>numCodeFind;
-        
-        bool exist = false;
-        while (getline(archive,dataReservation))
-        {
-            stringstream token(dataReservation);
 
-            getline(token, userName, ';');
-getline(token, entryDate, ';');
-getline(token, departureDate, ';');
-getline(token, roomCode, ';');
-getline(token, description, ';');
-getline(token, priceRoom, ';');
-
-
-            
-
-
-            if (numCodeFind.compare(roomCode) == 0)
-            {
-                exist = true;
-                cout<<roomCode<<endl;
-                cout<<priceRoom<<endl;
-                cout<<description<<endl;
-                cout<<departureDate<<endl;
-                cout<<entryDate<<endl;
-                cout<<userName<<endl;
-            }
-            
-            
-        }
-        archive.close();
-        if (!exist)
-        {
-            cout<<"La habitacion con el codigo "<<numCodeFind<<" no existe"<<endl;
-        }
-        
-    }
-    
-
-}
 
 void menu(){
     int option;
     do{
-        cout<<"Menu de opciones"<<endl;
-        cout<<"1. Crear cliente"<<endl;
-        cout<<"2. Listado de clientes"<<endl;
-        cout<<"3. crear una reservacion en el hotel"<<endl;
-        cout<<"4. Listar las reservaciones del hotel por codigo de habitación"<<endl;
+        cout<<"-Menu de opciones-"<<endl;
+        cout<<""<<endl;
+        cout<<"1. Crear cliente."<<endl;
+        cout<<"2. Listado de clientes."<<endl;
+        cout<<"3. Crear una reservacion en el hotel."<<endl;
+        cout<<"4. Listar las reservaciones del hotel por codigo de habitación."<<endl;
         cout<<"0. Salir"<<endl;
+        cout<<""<<endl;
         cout<<"Seleccione una opcion: "<<endl;
+        cout<<""<<endl;
         cin>>option;
         cout<<"   "<<endl;
         switch (option)
@@ -207,9 +239,9 @@ void menu(){
         case 4:
             findReservationByCode(); break;
         case 0:
-            cout<<"Esta saliendo de la aplicación, vuelva pronto"<<endl;; break;
+            cout<<"Esta saliendo de la aplicación, vuelva pronto!!!"<<endl;; break;
         default:
-            cout<<"La opcion que se esta usando no existe en el listado del hotel"<<endl;
+            cout<<"La opcion que se esta usando no existe en el listado del hotel :("<<endl;
             break;
         }
     }while(option != 0);
