@@ -11,7 +11,8 @@ void createReservation() {
         cout << "Error al crear el archivo reservation.txt revisa tu código." << endl;
     } else {
         string userName, entryDate, departureDate, description;
-        double priceRoom = 0, roomCode, totalPrice = 0;
+        double priceRoom = 0,totalPrice = 0;
+        int roomCode;
         char continueR;
 
         cout << "Datos del cliente" << endl << endl;
@@ -37,7 +38,7 @@ void createReservation() {
             cout << "Ingrese el código de la habitacion" << endl;
             cin >> roomCode;
 
-            switch (static_cast<int>(roomCode)) {
+            switch (roomCode) {
                 case 1:
                     description = "Habitacion grande";
                     priceRoom = 400;

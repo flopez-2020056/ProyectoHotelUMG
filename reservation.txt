@@ -16,3 +16,5 @@ Fredy ;4545;545;1;Habitacion grande;400;
 Fredy ;454;5454;3;Habitacion pequeña;500;
 Fredy;64;222;3;Habitacion pequeña;500;
 Fredy;64;222;4;Habitacion doble;800;
+fredy ;454;54;4;Habitacion doble;800;
+fredy ;454;54;3;Habitacion pequeña;500;
