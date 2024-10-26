@@ -9,61 +9,67 @@ using namespace std;
 
 
 
-void createReservation(){
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+void createReservation() {
     ofstream archive("reservation.txt", ios::app);
-    if (!archive)
-    {
-        cout<<"Error al crear el archivo reservation.txt revisa tu código.";
+    if (!archive) {
+        cout << "Error al crear el archivo reservation.txt revisa tu código." << endl;
     } else {
         string userName, entryDate, departureDate, description;
-        double priceRoom, roomCode;
+        double priceRoom, roomCode, totalPrice = 0;
         char continueR;
 
-        cout<<"Datos del cliente"<<endl<<endl;
+        cout << "Datos del cliente" << endl << endl;
 
-        cout<<"Nombre del cliente"<<endl;
+        cout << "Nombre del cliente" << endl;
         cin.ignore();
-        //cin>>userName;
         getline(cin, userName);
-        cout<<"Ingresa la fecha de ingreso (dia/mes/año)"<<endl;
-        //cin>>entryDate;
+        cout << "Ingresa la fecha de ingreso (dia/mes/año)" << endl;
         getline(cin, entryDate);
-        cout<<"Ingresa la fecha de salida (dia/mes/año)"<<endl;
-        //cin>>departureDate;
+        cout << "Ingresa la fecha de salida (dia/mes/año)" << endl;
         getline(cin, departureDate);
-        do
-        {
-            cout<<""<<endl;
-            cout<<"Datos de la habitacion a reservar"<<endl<<endl;
 
-            cout<<"Ingrese el código de la habitacion"<<endl;
-            cin>>roomCode;
+        do {
+            cout << endl << "Datos de la habitacion a reservar" << endl << endl;
+            cout << "Tipos de habitaciones disponibles" << endl;
+            cout << "codigo   Tipo de habitacion  Q200" << endl;
+            cout << "1.       Habitacion grande   Q400." << endl;
+            cout << "2.       Habitacion mediana. Q300" << endl;
+            cout << "3.       Habitacion pequeña  Q500" << endl;
+            cout << "4.       Habitacion doble    Q800" << endl;
+            cout << endl;
+
+            cout << "Ingrese el código de la habitacion" << endl;
+            cin >> roomCode;
             cin.ignore();
-            cout<<"Ingrese la descripcion de la habitacion"<<endl;
-            //cin>>description;
+            cout << "Ingrese la descripcion de la habitacion" << endl;
             getline(cin, description);
-            cout<<"Ingrese el precio de la habitacion"<<endl;
-            cin>>priceRoom;
+            cout << "Ingrese el precio de la habitacion" << endl;
+            cin >> priceRoom;
 
-            archive<<userName<<";"<<entryDate<<";"<<departureDate<<";"<<roomCode<<";"<<description<<";"<<priceRoom<<";"<<endl;
+            totalPrice += priceRoom;
+
+            archive << userName << ";" << entryDate << ";" << departureDate << ";" 
+                    << roomCode << ";" << description << ";" << priceRoom << ";" << endl;
              
-            cout<<""<<endl;
-            cout<<"Desea seguir agregando reservaciones? (S/N): ";
-            cin>>continueR;
-            cout<<""<<endl;
+            cout << endl << "Desea seguir agregando reservaciones? (S/N): ";
+            cin >> continueR;
+            cout << endl;
 
-
-           
         } while (continueR == 'S' || continueR == 's');
 
         archive.close();
 
-        cout<<"Se ingreso de manera correta la habitacion";
-        cout<<""<<endl;
-        
+        cout << "Se ingreso de manera correcta la habitacion." << endl;
+        cout << "Total a pagar por todas las reservaciones: Q" << totalPrice << endl;
+        cout << endl;
     }
-    
 }
+
 
 void findReservationByCode(){
     ifstream archive("reservation.txt", ios::in);

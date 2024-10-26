@@ -4,3 +4,8 @@ Fredy Lopez;12/3/2024;13/3/2024;78;Habitacion grande cons dos camas ;898;
 Fredy Lopez a ;12/3/2024;13/3/2024;77;habitacion ;78;
 Fred ;12/4/2024;13/4/2024;5;habitacion grande ;9;
 Fredy lopez ;12/3/2024;13/3/2024;78;habitacion ;66;
+dani;27/10/20204;30/10/2024;5;k;200;
+dani;27/10/20204;30/10/2024;25;98;845;
+fredy ;45;54;2;habitacion grande ;922;
+fredy ;12;13;3;habitacion grande ;125;
+fredy ;12;13;2;jfsdjfl;99;
