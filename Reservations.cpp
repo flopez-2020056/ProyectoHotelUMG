@@ -3,15 +3,6 @@
 #include<fstream>
 #include<sstream>
 
-#include <string>
-using namespace std;
-
-
-
-
-#include <iostream>
-#include <fstream>
-#include <string>
 using namespace std;
 
 void createReservation() {
@@ -20,7 +11,7 @@ void createReservation() {
         cout << "Error al crear el archivo reservation.txt revisa tu código." << endl;
     } else {
         string userName, entryDate, departureDate, description;
-        double priceRoom, roomCode, totalPrice = 0;
+        double priceRoom = 0, roomCode, totalPrice = 0;
         char continueR;
 
         cout << "Datos del cliente" << endl << endl;
@@ -36,20 +27,42 @@ void createReservation() {
         do {
             cout << endl << "Datos de la habitacion a reservar" << endl << endl;
             cout << "Tipos de habitaciones disponibles" << endl;
-            cout << "codigo   Tipo de habitacion  Q200" << endl;
-            cout << "1.       Habitacion grande   Q400." << endl;
-            cout << "2.       Habitacion mediana. Q300" << endl;
+            cout << "codigo   Tipo de habitacion" << endl;
+            cout << "1.       Habitacion grande   Q400" << endl;
+            cout << "2.       Habitacion mediana  Q300" << endl;
             cout << "3.       Habitacion pequeña  Q500" << endl;
             cout << "4.       Habitacion doble    Q800" << endl;
             cout << endl;
 
             cout << "Ingrese el código de la habitacion" << endl;
             cin >> roomCode;
-            cin.ignore();
-            cout << "Ingrese la descripcion de la habitacion" << endl;
-            getline(cin, description);
-            cout << "Ingrese el precio de la habitacion" << endl;
-            cin >> priceRoom;
+
+            switch (static_cast<int>(roomCode)) {
+                case 1:
+                    description = "Habitacion grande";
+                    priceRoom = 400;
+                    cout << "Escogiste la " << description << " con un precio de Q" << priceRoom << endl;
+
+                    break;
+                case 2:
+                    description = "Habitacion mediana";
+                    priceRoom = 300;
+                    cout << "Escogiste la " << description << " con un precio de Q" << priceRoom << endl;
+                    break;
+                case 3:
+                    description = "Habitacion pequeña";
+                    priceRoom = 500;
+                    cout << "Escogiste la " << description << " con un precio de Q" << priceRoom << endl;
+                    break;
+                case 4:
+                    description = "Habitacion doble";
+                    priceRoom = 800;
+                    cout << "Escogiste la " << description << " con un precio de Q" << priceRoom << endl;
+                    break;
+                default:
+                    cout << "Código de habitación no válido. Intente nuevamente." << endl;
+                    continue;
+            }
 
             totalPrice += priceRoom;
 
@@ -64,8 +77,8 @@ void createReservation() {
 
         archive.close();
 
-        cout << "Se ingreso de manera correcta la habitacion." << endl;
-        cout << "Total a pagar por todas las reservaciones: Q" << totalPrice << endl;
+        cout << "Se ingresó de manera correcta la reservación." << endl;
+        cout << "Total a pagar por todas las reservaciones: " << totalPrice << endl;
         cout << endl;
     }
 }
